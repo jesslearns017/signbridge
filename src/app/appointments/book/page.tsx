@@ -128,13 +128,12 @@ export default function BookAppointmentPage() {
       await createAppointment({
         provider_id: selectedProvider,
         scheduled_start: appointmentStart.toISOString(),  // Keep as scheduled_start
+        scheduled_end: appointmentEnd.toISOString(),  // ADD THIS LINE
         reason,
         needs_interpreter: needsInterpreter,
-        preferred_sign_language: needsInterpreter
-          ? preferredSignLanguage
-          : undefined,
-        notes: notes || undefined,
-      })
+        preferred_sign_language: preferredLanguage,
+        notes,
+})
 
       toast({
         title: 'Appointment Booked!',
