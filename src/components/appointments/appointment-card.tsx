@@ -112,7 +112,7 @@ export function AppointmentCard({
               </div>
 
               {/* Interpreter Info */}
-              {appointment.needs_interpreter && (
+              {appointment.requires_interpreter && (
                 <div className="flex items-center gap-2 mb-2">
                   <Users className="w-4 h-4 text-deaf-turquoise" />
                   <span className="text-sm text-deaf-turquoise font-medium">
