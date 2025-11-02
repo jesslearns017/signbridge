@@ -128,7 +128,6 @@ export default function BookAppointmentPage() {
       await createAppointment({
         provider_id: selectedProvider,
         appointment_date: appointmentStart.toISOString(),  // Change from scheduled_start
-        scheduled_end: appointmentEnd.toISOString(),
         reason,
         needs_interpreter: needsInterpreter,
         preferred_sign_language: needsInterpreter

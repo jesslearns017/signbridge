@@ -97,11 +97,11 @@ export function useAppointments() {
       const appointmentData: AppointmentInsert = {
         patient_id: user.id,
         provider_id: data.provider_id,
-        scheduled_start: data.scheduled_start,
-        scheduled_end: data.scheduled_end,
+        appointment_date: data.appointment_date,  // Changed from scheduled_start
+        duration_minutes: 30,  // Default duration
         status: 'scheduled',
-        reason: data.reason,
-        needs_interpreter: data.needs_interpreter,
+        appointment_type: data.reason,  // Use reason as appointment_type
+        requires_interpreter: data.needs_interpreter,
         preferred_sign_language: data.preferred_sign_language || null,
         notes: data.notes || null,
       }
