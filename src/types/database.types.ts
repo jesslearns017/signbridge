@@ -126,13 +126,18 @@ export interface Database {
           patient_id: string
           provider_id: string
           interpreter_id: string | null
-          appointment_date: string
-          duration_minutes: number
+          scheduled_start: string
+          scheduled_end: string
           status: 'scheduled' | 'in_progress' | 'completed' | 'cancelled'
-          appointment_type: string | null
-          requires_interpreter: boolean
+          reason: string | null
+          needs_interpreter: boolean
           preferred_sign_language: string | null
           notes: string | null
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          cancelled_by: string | null
+          actual_start: string | null
+          actual_end: string | null
           created_at: string
           updated_at: string
         }
@@ -141,13 +146,18 @@ export interface Database {
           patient_id: string
           provider_id: string
           interpreter_id?: string | null
-          appointment_date: string
-          duration_minutes?: number
+          scheduled_start: string
+          scheduled_end: string
           status?: 'scheduled' | 'in_progress' | 'completed' | 'cancelled'
-          appointment_type?: string | null
-          requires_interpreter?: boolean
+          reason?: string | null
+          needs_interpreter?: boolean
           preferred_sign_language?: string | null
           notes?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          actual_start?: string | null
+          actual_end?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -156,13 +166,18 @@ export interface Database {
           patient_id?: string
           provider_id?: string
           interpreter_id?: string | null
-          appointment_date?: string
-          duration_minutes?: number
+          scheduled_start?: string
+          scheduled_end?: string
           status?: 'scheduled' | 'in_progress' | 'completed' | 'cancelled'
-          appointment_type?: string | null
-          requires_interpreter?: boolean
+          reason?: string | null
+          needs_interpreter?: boolean
           preferred_sign_language?: string | null
           notes?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          actual_start?: string | null
+          actual_end?: string | null
           created_at?: string
           updated_at?: string
         }
