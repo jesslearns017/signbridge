@@ -121,9 +121,6 @@ export function useVideoCall(appointmentId: string) {
         // Create Daily.co call object
         const callObject = DailyIframe.createCallObject({
           subscribeToTracksAutomatically: true,
-          dailyConfig: {
-            experimentalChromeVideoMuteLightOff: true,
-          },
         })
 
         setState((s) => ({ ...s, callObject }))
