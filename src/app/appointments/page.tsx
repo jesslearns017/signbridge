@@ -41,7 +41,7 @@ export default function AppointmentsPage() {
   // Filter appointments
   const now = new Date()
   const filteredAppointments = appointments.filter((apt) => {
-    const aptDate = new Date(apt.scheduled_start)
+    const aptDate = new Date(apt.appointment_date)
 
     switch (filter) {
       case 'upcoming':
