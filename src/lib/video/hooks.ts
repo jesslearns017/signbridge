@@ -157,7 +157,7 @@ export function useVideoCall(appointmentId: string) {
   // Event listeners
   const setupEventListeners = (callObject: DailyCall) => {
     // Participant joined
-    callObject.on('participant-joined', (event: DailyEventObjectParticipant) => {
+    callObject.on('participant-joined', (event: any) => {
       const participant = mapParticipant(event.participant, false)
       setState((s) => {
         const newParticipants = new Map(s.participants)
@@ -167,7 +167,7 @@ export function useVideoCall(appointmentId: string) {
     })
 
     // Participant updated
-    callObject.on('participant-updated', (event: DailyEventObjectParticipant) => {
+    callObject.on('participant-updated', (event: any) => {
       const participant = mapParticipant(event.participant, event.participant.local)
       setState((s) => {
         const newParticipants = new Map(s.participants)
@@ -184,7 +184,7 @@ export function useVideoCall(appointmentId: string) {
     })
 
     // Participant left
-    callObject.on('participant-left', (event: DailyEventObjectParticipant) => {
+    callObject.on('participant-left', (event: any) => {
       setState((s) => {
         const newParticipants = new Map(s.participants)
         newParticipants.delete(event.participant.session_id)
