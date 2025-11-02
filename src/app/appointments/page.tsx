@@ -41,7 +41,7 @@ export default function AppointmentsPage() {
   // Filter appointments
   const now = new Date()
   const filteredAppointments = appointments.filter((apt) => {
-    const aptDate = new Date(apt.appointment_date)  // Change from scheduled_start
+    const aptDate = new Date(apt.scheduled_start)
 
     switch (filter) {
       case 'upcoming':
@@ -58,15 +58,15 @@ export default function AppointmentsPage() {
 
   // Count appointments by status
   const upcomingCount = appointments.filter(
-    (apt) => new Date(apt.appointment_date) > now && apt.status !== 'cancelled'
+    (apt) => new Date(apt.scheduled_start) > now && apt.status !== 'cancelled'
   ).length
   const pastCount = appointments.filter(
-    (apt) => new Date(apt.appointment_date) < now || apt.status === 'completed'
+    (apt) => new Date(apt.scheduled_start) < now || apt.status === 'completed'
   ).length
   const cancelledCount = appointments.filter(
     (apt) => apt.status === 'cancelled'
   ).length
-
+  
   const handleCancel = async (appointmentId: string) => {
     if (!confirm('Are you sure you want to cancel this appointment?')) {
       return
