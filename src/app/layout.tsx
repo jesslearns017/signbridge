@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, DM_Serif_Display } from 'next/font/google'
 import { Providers } from './providers'
+import { TestBanner } from '@/components/test-banner'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const dmSerif = DM_Serif_Display({
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
+        <TestBanner />
         <Providers>
           {children}
         </Providers>
