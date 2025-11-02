@@ -81,7 +81,7 @@ export function AppointmentCard({
                   )}
                   {role === 'provider' && (
                     <p className="text-sm text-gray-600 mb-1">
-                      {appointment.appointment_type}
+                      {appointment.reason}
                     </p>
                   )}
                 </div>
@@ -112,7 +112,7 @@ export function AppointmentCard({
               </div>
 
               {/* Interpreter Info */}
-              {appointment.requires_interpreter && (
+              {appointment.needs_interpreter && (
                 <div className="flex items-center gap-2 mb-2">
                   <Users className="w-4 h-4 text-deaf-turquoise" />
                   <span className="text-sm text-deaf-turquoise font-medium">
