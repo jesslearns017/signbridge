@@ -21,8 +21,8 @@ export function AppointmentCard({
   onCancel,
   onReschedule,
 }: AppointmentCardProps) {
-  const scheduledStart = new Date(appointment.appointment_date)
-  const scheduledEnd = new Date(new Date(appointment.appointment_date).getTime() + appointment.duration_minutes * 60000)
+  const scheduledStart = new Date(appointment.scheduled_start)
+  const scheduledEnd = new Date(appointment.scheduled_end)
   const now = new Date()
   const isUpcoming = scheduledStart > now
   const isToday =
