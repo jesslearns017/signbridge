@@ -94,19 +94,15 @@ export function useAppointments() {
   if (!user) throw new Error('User not authenticated')
 
   try {
-    // Calculate duration from start and end times
-    const startTime = new Date(data.scheduled_start)
-    const endTime = new Date(data.scheduled_end)
-    const durationMinutes = Math.round((endTime.getTime() - startTime.getTime()) / (1000 * 60))
 
     const appointmentData: AppointmentInsert = {
       patient_id: user.id,
       provider_id: data.provider_id,
-      appointment_date: data.scheduled_start,  // Store start time here
-      duration_minutes: durationMinutes,       // Store calculated duration
+      scheduled_start: data.scheduled_start,
+      scheduled_end: data.scheduled_end,
       status: 'scheduled',
-      appointment_type: data.reason,
-      requires_interpreter: data.needs_interpreter,
+      reason: data.reason,
+      needs_interpreter: data.needs_interpreter,
       preferred_sign_language: data.preferred_sign_language || null,
       notes: data.notes || null,
     }
@@ -169,27 +165,24 @@ export function useAppointments() {
   }
 
   async function cancelAppointment(appointmentId: string, reason: string) {
-    return updateAppointment(appointmentId, {
-      status: 'cancelled',
-      notes: reason ? `Cancellation reason: ${reason}` : null,
-    })
-  }
-
+  return updateAppointment(appointmentId, {
+    status: 'cancelled',
+    cancellation_reason: reason,
+    cancelled_at: new Date().toISOString(),
+    cancelled_by: user!.id,
+  })
+}
   async function rescheduleAppointment(
-    appointmentId: string,
-    newStart: string,
-    newEnd: string
-  ) {
-    const startTime = new Date(newStart)
-    const endTime = new Date(newEnd)
-    const durationMinutes = Math.round((endTime.getTime() - startTime.getTime()) / (1000 * 60))
-
-    return updateAppointment(appointmentId, {
-      appointment_date: newStart,
-      duration_minutes: durationMinutes,
-      status: 'scheduled',
-    })
-  }
+  appointmentId: string,
+  newStart: string,
+  newEnd: string
+) {
+  return updateAppointment(appointmentId, {
+    scheduled_start: newStart,
+    scheduled_end: newEnd,
+    status: 'scheduled',
+  })
+}
 
   async function startAppointment(appointmentId: string) {
     return updateAppointment(appointmentId, {

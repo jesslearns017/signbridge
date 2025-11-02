@@ -39,7 +39,7 @@ export default function AppointmentsPage() {
   }
 
   // Filter appointments
-  const now = new Date()
+    const now = new Date()
   const filteredAppointments = appointments.filter((apt) => {
     const aptDate = new Date(apt.scheduled_start)
 
@@ -66,7 +66,7 @@ export default function AppointmentsPage() {
   const cancelledCount = appointments.filter(
     (apt) => apt.status === 'cancelled'
   ).length
-  
+   
   const handleCancel = async (appointmentId: string) => {
     if (!confirm('Are you sure you want to cancel this appointment?')) {
       return
