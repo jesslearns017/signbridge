@@ -131,7 +131,7 @@ export default function BookAppointmentPage() {
         scheduled_end: appointmentEnd.toISOString(),  // ADD THIS LINE
         reason,
         needs_interpreter: needsInterpreter,
-        preferred_sign_language: preferredLanguage,
+        preferred_sign_language: preferredSignLanguage,
         notes,
 })
 
