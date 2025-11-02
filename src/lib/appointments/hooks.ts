@@ -171,9 +171,7 @@ export function useAppointments() {
   async function cancelAppointment(appointmentId: string, reason: string) {
     return updateAppointment(appointmentId, {
       status: 'cancelled',
-      cancellation_reason: reason,
-      cancelled_at: new Date().toISOString(),
-      cancelled_by: user!.id,
+      notes: reason ? `Cancellation reason: ${reason}` : null,
     })
   }
 
@@ -182,9 +180,13 @@ export function useAppointments() {
     newStart: string,
     newEnd: string
   ) {
+    const startTime = new Date(newStart)
+    const endTime = new Date(newEnd)
+    const durationMinutes = Math.round((endTime.getTime() - startTime.getTime()) / (1000 * 60))
+
     return updateAppointment(appointmentId, {
-      scheduled_start: newStart,
-      scheduled_end: newEnd,
+      appointment_date: newStart,
+      duration_minutes: durationMinutes,
       status: 'scheduled',
     })
   }
