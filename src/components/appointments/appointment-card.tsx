@@ -81,7 +81,7 @@ export function AppointmentCard({
                   )}
                   {role === 'provider' && (
                     <p className="text-sm text-gray-600 mb-1">
-                      {appointment.reason}
+                      {appointment.appointment_type}
                     </p>
                   )}
                 </div>
