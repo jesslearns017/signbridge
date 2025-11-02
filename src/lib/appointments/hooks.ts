@@ -83,28 +83,33 @@ export function useAppointments() {
   }
 
   async function createAppointment(data: {
-    provider_id: string
-    scheduled_start: string
-    scheduled_end: string
-    reason: string
-    needs_interpreter: boolean
-    preferred_sign_language?: string
-    notes?: string
-  }) {
-    if (!user) throw new Error('User not authenticated')
+  provider_id: string
+  scheduled_start: string  // Keep this - it's the start time
+  scheduled_end: string    // Keep this - it's the end time
+  reason: string
+  needs_interpreter: boolean
+  preferred_sign_language?: string
+  notes?: string
+}) {
+  if (!user) throw new Error('User not authenticated')
 
-    try {
-      const appointmentData: AppointmentInsert = {
-        patient_id: user.id,
-        provider_id: data.provider_id,
-        appointment_date: data.appointment_date,  // Changed from scheduled_start
-        duration_minutes: 30,  // Default duration
-        status: 'scheduled',
-        appointment_type: data.reason,  // Use reason as appointment_type
-        requires_interpreter: data.needs_interpreter,
-        preferred_sign_language: data.preferred_sign_language || null,
-        notes: data.notes || null,
-      }
+  try {
+    // Calculate duration from start and end times
+    const startTime = new Date(data.scheduled_start)
+    const endTime = new Date(data.scheduled_end)
+    const durationMinutes = Math.round((endTime.getTime() - startTime.getTime()) / (1000 * 60))
+
+    const appointmentData: AppointmentInsert = {
+      patient_id: user.id,
+      provider_id: data.provider_id,
+      appointment_date: data.scheduled_start,  // Store start time here
+      duration_minutes: durationMinutes,       // Store calculated duration
+      status: 'scheduled',
+      appointment_type: data.reason,
+      requires_interpreter: data.needs_interpreter,
+      preferred_sign_language: data.preferred_sign_language || null,
+      notes: data.notes || null,
+    }
 
       const { data: appointment, error } = await supabase
         .from('appointments')
